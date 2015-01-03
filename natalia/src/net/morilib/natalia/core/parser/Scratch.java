@@ -30,17 +30,47 @@ public class Scratch {
 	private static final int _LATITUDE_BORDER = 64;
 	private static final int _ALL = 127;
 
-	//
-	static final Scratch NONE = _get(0);
-	static final Scratch FRAME_CORNER = _get(_FRAME | _CORNER);
-	static final Scratch FRAME = _get(_FRAME);
-	static final Scratch BORDER_CROSSING = _get(_BORDER | _CROSSING);
-	static final Scratch VERTICAL_FRAME = _get(_FRAME | _VERTICAL_FRAME);
-	static final Scratch LONGITUDINAL_BORDER =
+	/**
+	 * 
+	 */
+	public static final Scratch NONE = _get(0);
+
+	/**
+	 * 
+	 */
+	public static final Scratch FRAME_CORNER = _get(_FRAME | _CORNER);
+
+	/**
+	 * 
+	 */
+	public static final Scratch FRAME = _get(_FRAME);
+
+	/**
+	 * 
+	 */
+	public static final Scratch BORDER_CROSSING = _get(_BORDER | _CROSSING);
+
+	/**
+	 * 
+	 */
+	public static final Scratch VERTICAL_FRAME = _get(_FRAME | _VERTICAL_FRAME);
+
+	/**
+	 * 
+	 */
+	public static final Scratch LONGITUDINAL_BORDER =
 			_get(_BORDER | _LONGITUDE_BORDER);
-	static final Scratch LATITUDINAL_BORDER =
+
+	/**
+	 * 
+	 */
+	public static final Scratch LATITUDINAL_BORDER =
 			_get(_BORDER | _LATITUDE_BORDER);
-	static final Scratch FRAME_END_CORNER =
+
+	/**
+	 * 
+	 */
+	public static final Scratch FRAME_END_CORNER =
 			_get(_FRAME | _CORNER | _VERTICAL_FRAME);
 
 	//
