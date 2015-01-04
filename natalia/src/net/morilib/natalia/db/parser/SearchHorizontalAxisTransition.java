@@ -17,7 +17,6 @@ package net.morilib.natalia.db.parser;
 
 import java.util.EnumSet;
 
-import net.morilib.natalia.core.parser.ParserException;
 import net.morilib.natalia.core.parser.Quadro;
 
 /**
@@ -35,28 +34,68 @@ public class SearchHorizontalAxisTransition implements Transition {
 	public PS transit(Quadro q, PS state) {
 		switch(state) {
 		case SEARCH_AXIS_INIT:
-			if(q.get().isWall()) {
+			if(q.getScratch().isFrame()) {
+				q.moveWest();
+				return PS.SEARCH_AXIS_R0;
+			} else if(q.get().isWall()) {
 				q.moveEast();
 				return PS.SEARCH_AXIS_WALL;
+			} else if(q.get().isJunction()) {
+				q.moveEast();
+				return PS.SEARCH_AXIS_FIND1;
 			} else if(q.get().isBound()) {
-				throw new ParserException();
-			} else {
 				q.crlf();
+			} else {
+				q.moveEast();
 			}
 			return state;
+		case SEARCH_AXIS_R0:
+			if(q.getScratch().isFrame() || q.get().isBound()) {
+				q.moveEast().moveSouth();
+				return PS.SEARCH_AXIS_INIT;
+			} else {
+				q.moveWest();
+			}
+			return state;
+		case SEARCH_AXIS_FIND1:
+			if(q.get().isWall() || q.get().isJunction()) {
+				q.moveEast();
+				return PS.SEARCH_AXIS_FIND2;
+			} else {
+				return PS.SEARCH_AXIS_INIT;
+			}
+		case SEARCH_AXIS_FIND2:
+			if(q.get().isWall() || q.get().isJunction()) {
+				q.moveWest().moveWest();
+				return PS.FRAME_INIT;
+			} else {
+				q.moveWest();
+				return PS.SEARCH_AXIS_INIT;
+			}
+		case FRAME_END:
+			q.turnNorth().moveEast().moveSouth();
+			return PS.SEARCH_AXIS_INIT;
 		case SEARCH_AXIS_WALL:
 			if(q.get().isWall()) {
 				q.moveEast();
 			} else if(q.get().isJunction()) {
-				q.crlf().moveNorth();
-				return PS.SEARCH_AXIS_END;
+				q.moveWest();
+				return PS.SEARCH_AXIS_R;
 			} else {
-				q.crlf();
+				q.moveEast();
 				return PS.SEARCH_AXIS_INIT;
 			}
 			return state;
+		case SEARCH_AXIS_R:
+			if(q.get().isWall()) {
+				q.moveWest();
+			} else {
+				q.moveEast();
+				return PS.SEARCH_AXIS_END;
+			}
+			return state;
 		default:
-			throw new IllegalStateException();
+			return FrameTransition.I.transit(q, state);
 		}
 	}
 
@@ -68,8 +107,13 @@ public class SearchHorizontalAxisTransition implements Transition {
 		EnumSet<PS> r;
 
 		r = EnumSet.of(PS.SEARCH_AXIS_INIT,
+				PS.SEARCH_AXIS_R0,
+				PS.SEARCH_AXIS_FIND1,
+				PS.SEARCH_AXIS_FIND2,
 				PS.SEARCH_AXIS_WALL,
+				PS.SEARCH_AXIS_R,
 				PS.SEARCH_AXIS_END);
+		r.addAll(FrameTransition.I.getStates());
 		return r;
 	}
 

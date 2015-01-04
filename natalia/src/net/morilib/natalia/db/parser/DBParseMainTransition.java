@@ -23,10 +23,10 @@ import net.morilib.natalia.core.parser.Quadro;
  *
  * @author Yuichiro MORIGUCHI
  */
-public class PostgresMainTransition implements Transition {
+public class DBParseMainTransition implements Transition {
 
 	//
-	static final Transition I = new PostgresMainTransition();
+	static final Transition I = new DBParseMainTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.db.parser.Transition#transit(net.morilib.natalia.core.parser.Quadro, net.morilib.natalia.db.parser.PS)

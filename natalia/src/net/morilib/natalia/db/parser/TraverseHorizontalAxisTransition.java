@@ -37,7 +37,10 @@ public class TraverseHorizontalAxisTransition implements Transition {
 	public PS transit(Quadro q, PS state) {
 		switch(state) {
 		case T_AXIS_INIT:
-			if(q.get().isWall()) {
+			if(q.getScratch().isFrame()) {
+				q.moveWest().mark(this).moveNorth();
+				return PS.T_AXIS_EAST_FRAME;
+			} else if(q.get().isWall()) {
 				q.moveEast();
 			} else if(q.get().isJunction()) {
 				q.moveNorth();
@@ -86,7 +89,10 @@ public class TraverseHorizontalAxisTransition implements Transition {
 		case T_AXIS_WEST:
 			q.setScratch(q.getScratch().add(
 					Scratch.LONGITUDINAL_BORDER));
-			if(q.get().isWall() || q.get().isJunction()) {
+			if(q.getScratch().isFrame()) {
+				q.moveEast().mark(this);
+				return PS.T_AXIS_WEST_FRAME;
+			} else if(q.get().isWall() || q.get().isJunction()) {
 				q.moveWest();
 			} else {
 				q.moveEast().mark(this);

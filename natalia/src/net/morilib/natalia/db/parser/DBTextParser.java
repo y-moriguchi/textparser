@@ -31,17 +31,17 @@ import net.morilib.natalia.core.parser.SimpleTableModelBuilder;
 /**
  *
  */
-public class DbTextParser {
+public class DBTextParser {
 
 	//
 	private static final int INFINITE_LOOP = 720000;
-	private static final DbTextParser INS = new DbTextParser();
+	private static final DBTextParser INS = new DBTextParser();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public static final DbTextParser getInstance() {
+	public static final DBTextParser getInstance() {
 		return INS;
 	}
 
@@ -61,10 +61,10 @@ public class DbTextParser {
 	}
 
 	//
-	static TableModel parsePostgresTable(Quadro q) {
+	static TableModel parseDBText(Quadro q) {
 		q.setTableModelBuilder(new SimpleTableModelBuilder());
 		go(PS.POSTGRES_MAIN_INIT, PS.POSTGRES_MAIN_END,
-				PostgresMainTransition.I, q);
+				DBParseMainTransition.I, q);
 		return q.getTableModelBuilder().toTableModel();
 	}
 
@@ -73,11 +73,11 @@ public class DbTextParser {
 	 * @param s
 	 * @return
 	 */
-	public TableModel parsePostgresTable(String s) {
+	public TableModel parseDBText(String s) {
 		Quadro q;
 
 		q = QuadroFactory.newInstance(s);
-		return parsePostgresTable(q);
+		return parseDBText(q);
 	}
 
 	/**
@@ -86,11 +86,11 @@ public class DbTextParser {
 	 * @return
 	 * @throws IOException
 	 */
-	public TableModel parsePostgresTable(Reader ins) throws IOException {
+	public TableModel parseDBText(Reader ins) throws IOException {
 		Quadro q;
 
 		q = QuadroFactory.newInstance(new BufferedReader(ins));
-		return parsePostgresTable(q);
+		return parseDBText(q);
 	}
 
 	/**
@@ -99,12 +99,12 @@ public class DbTextParser {
 	 * @return
 	 * @throws IOException
 	 */
-	public TableModel parsePostgresTable(InputStream ins) throws IOException {
+	public TableModel parseDBText(InputStream ins) throws IOException {
 		Quadro q;
 
 		q = QuadroFactory.newInstance(new BufferedReader(
 				new InputStreamReader(ins)));
-		return parsePostgresTable(q);
+		return parseDBText(q);
 	}
 
 	/**
@@ -113,12 +113,12 @@ public class DbTextParser {
 	 * @return
 	 * @throws IOException
 	 */
-	public TableModel parsePostgresTable(File f) throws IOException {
+	public TableModel parseDBText(File f) throws IOException {
 		InputStream ins = null;
 
 		try {
 			ins = new FileInputStream(f);
-			return parsePostgresTable(ins);
+			return parseDBText(ins);
 		} finally {
 			if(ins != null) {
 				ins.close();
