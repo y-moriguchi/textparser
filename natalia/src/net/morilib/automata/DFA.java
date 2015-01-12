@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Yuichiro Moriguchi
+ * Copyright 2009 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata;
 
-import java.util.Set;
-
-public interface Transition<S, P> {
-
-	/**
-	 * 
-	 * @param q
-	 * @param state
-	 * @return
-	 */
-	public P transit(Quadro<S> q, P state);
+/**
+ * 
+ * 
+ * @author MORIGUCHI, Yuichiro 2006/05/21
+ */
+public interface DFA<T, A, B> {
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Set<P> getStates();
+	public DFAState<T, A, B> getInitialState();
 
 }

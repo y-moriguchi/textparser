@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Yuichiro Moriguchi
+ * Copyright 2009 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata;
 
-import java.util.Set;
+import java.util.EnumSet;
 
-public interface Transition<S, P> {
+/**
+ * 
+ *
+ *
+ * @author MORIGUCHI, Yuichiro 2006
+ */
+public enum TextBound {
+	BEGIN_LINE,
+	END_LINE,
+	WORD,
+	NOT_WORD,
+	BEGIN_INPUT,
+	END_INPUT,
+	END_INPUT_WITHOUT_LINE,
+	;
 
 	/**
 	 * 
-	 * @param q
-	 * @param state
-	 * @return
 	 */
-	public P transit(Quadro<S> q, P state);
+	public static final EnumSet<TextBound> BEGIN_LINE_SET =
+		EnumSet.of(BEGIN_LINE);
 
 	/**
 	 * 
-	 * @return
 	 */
-	public Set<P> getStates();
+	public static final EnumSet<TextBound> END_LINE_SET =
+		EnumSet.of(END_LINE);
+
+	/**
+	 * 
+	 */
+	public static final EnumSet<TextBound> ALL =
+		EnumSet.allOf(TextBound.class);
 
 }

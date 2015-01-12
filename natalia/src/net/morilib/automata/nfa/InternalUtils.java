@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata.nfa;
 
-import java.util.Set;
+/**
+ *
+ * @author Yuichiro MORIGUCHI
+ */
+final class InternalUtils {
 
-public interface Transition<S, P> {
-
-	/**
-	 * 
-	 * @param q
-	 * @param state
-	 * @return
-	 */
-	public P transit(Quadro<S> q, P state);
+	private InternalUtils() {}
 
 	/**
+	 * Returns true if the given objects are equal.<br>
+	 * <p>与えられた引数が等しいときにtrueを得る.
 	 * 
-	 * @return
+	 * @return  true if obj1 equals obj2, otherwise false
 	 */
-	public Set<P> getStates();
+	public static /*inline*/ boolean equals(Object obj1, Object obj2) {
+		return (obj1 == null) ? obj2 == null : obj1.equals(obj2);
+	}
 
 }

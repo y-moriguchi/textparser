@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Yuichiro Moriguchi
+ * Copyright 2009 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata.nfa;
 
-import java.util.Set;
-
-public interface Transition<S, P> {
+public class NFABuildException extends RuntimeException {
 
 	/**
 	 * 
-	 * @param q
-	 * @param state
-	 * @return
 	 */
-	public P transit(Quadro<S> q, P state);
+	private static final long serialVersionUID = -2506076920879308461L;
 
 	/**
 	 * 
-	 * @return
 	 */
-	public Set<P> getStates();
+	public NFABuildException() {
+		super();
+	}
+
+	/**
+	 * @param message
+	 */
+	public NFABuildException(String message) {
+		super(message);
+	}
 
 }

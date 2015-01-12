@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Yuichiro Moriguchi
+ * Copyright 2009-2010 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata;
 
-import java.util.Set;
+/**
+ *
+ *
+ * @author MORIGUCHI, Yuichiro 2013/10/20
+ */
+public enum RegexMetaCharacter {
 
-public interface Transition<S, P> {
-
-	/**
-	 * 
-	 * @param q
-	 * @param state
-	 * @return
-	 */
-	public P transit(Quadro<S> q, P state);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<P> getStates();
+	ALTERNATION,
+	REPETATION_ZERO,
+	REPETATION_ONE,
+	OPTION,
+	BLOCK_BEGIN,
+	BLOCK_END
 
 }

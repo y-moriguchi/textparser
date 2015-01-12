@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Yuichiro Moriguchi
+ * Copyright 2009-2010 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata;
 
-import java.util.Set;
-
-public interface Transition<S, P> {
-
-	/**
-	 * 
-	 * @param q
-	 * @param state
-	 * @return
-	 */
-	public P transit(Quadro<S> q, P state);
+/**
+ *
+ *
+ * @author MORIGUCHI, Yuichiro 2013/01/02
+ */
+public class AlphabetsNotDiscreteException extends RuntimeException {
 
 	/**
 	 * 
-	 * @return
 	 */
-	public Set<P> getStates();
+	public AlphabetsNotDiscreteException() {
+		super();
+	}
+
+	/**
+	 * @param message
+	 */
+	public AlphabetsNotDiscreteException(String message) {
+		super(message);
+	}
 
 }

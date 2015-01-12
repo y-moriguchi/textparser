@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Yuichiro Moriguchi
+ * Copyright 2009 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.lba2d;
+package net.morilib.automata;
 
 import java.util.Set;
 
-public interface Transition<S, P> {
+import net.morilib.natalia.range.Range;
+
+/**
+ * 
+ * 
+ * @author MORIGUCHI, Yuichiro 2006/07/13
+ */
+public interface NFAEdges<T> {
 
 	/**
 	 * 
-	 * @param q
-	 * @param state
+	 * @param alphabet
 	 * @return
 	 */
-	public P transit(Quadro<S> q, P state);
+	public Set<NFAState> goNext(T alphabet);
+
+	/**
+	 * 
+	 * @param alphabet
+	 * @return
+	 */
+	public Set<NFAState> goNext(int alphabet);
+
+	/**
+	 * 
+	 * @param alphabet
+	 * @return
+	 */
+	public Set<NFAState> goNext(char alphabet);
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Set<P> getStates();
+	public Set<NFAState> goNextEpsilon();
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Set<? extends Range> nextAlphabets();
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isNextEpsilon();
 
 }

@@ -89,6 +89,7 @@ implements Transition<Scratch, ParserState> {
 		EnumSet<ParserState> r;
 
 		r = EnumSet.of(ParserState.FSEARCH_INIT,
+				ParserState.FSEARCH_FIND0,
 				ParserState.FSEARCH_FIND1,
 				ParserState.FSEARCH_FIND2,
 				ParserState.FSEARCH_END);
