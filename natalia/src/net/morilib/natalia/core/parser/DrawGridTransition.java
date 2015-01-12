@@ -17,10 +17,15 @@ package net.morilib.natalia.core.parser;
 
 import java.util.EnumSet;
 
-public class DrawGridTransition implements Transition {
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
+
+public class DrawGridTransition
+implements Transition<Scratch, ParserState> {
 
 	@Override
-	public ParserState transit(Quadro q, ParserState state) {
+	public ParserState transit(Quadro<Scratch> q, ParserState state) {
 		switch(state) {
 		case DRAW_GRID_INIT:
 			q.turnEast();

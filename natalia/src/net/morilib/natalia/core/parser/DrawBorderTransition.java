@@ -17,16 +17,22 @@ package net.morilib.natalia.core.parser;
 
 import java.util.EnumSet;
 
-public class DrawBorderTransition implements Transition {
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
+
+public class DrawBorderTransition
+implements Transition<Scratch, ParserState> {
 
 	//
-	static final Transition INSTANCE = new DrawBorderTransition();
+	static final Transition<Scratch, ParserState> INSTANCE =
+			new DrawBorderTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.Transition#transit(net.morilib.natalia.Quadro, net.morilib.natalia.ParserState)
 	 */
 	@Override
-	public ParserState transit(Quadro q, ParserState state) {
+	public ParserState transit(Quadro<Scratch> q, ParserState state) {
 		switch(state) {
 		case DRAW_BORDER_INIT:
 			q.mark(this).turnRight().forward();

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.core.parser;
+package net.morilib.natalia.lba2d;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -87,15 +87,17 @@ public class QuadroFactory {
 	 * @param s
 	 * @return
 	 */
-	public static Quadro newInstance(String s) {
+	public static<S> Quadro<S> newInstance(String s, S zero) {
 		String[] a = s.split("\n");
 		Pixel[][] p;
+		TextArt t;
 
 		p = new Pixel[a.length][];
 		for(int k = 0; k < a.length; k++) {
 			p[k] = toPixel(a[k]);
 		}
-		return new QuadroImpl(p);
+		t = new MemoryTextArt(p);
+		return new QuadroImpl<S>(t, zero);
 	}
 
 	/**
@@ -104,16 +106,18 @@ public class QuadroFactory {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Quadro newInstance(
-			BufferedReader rd) throws IOException {
+	public static<S> Quadro<S> newInstance(BufferedReader rd,
+			S zero) throws IOException {
 		List<Pixel[]> l;
+		TextArt t;
 		String s;
 
 		l = new ArrayList<Pixel[]>();
 		while((s = rd.readLine()) != null) {
 			l.add(toPixel(s));
 		}
-		return new QuadroImpl(l);
+		t = new MemoryTextArt(l);
+		return new QuadroImpl<S>(t, zero);
 	}
 
 }

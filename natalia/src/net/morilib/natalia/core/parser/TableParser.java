@@ -23,7 +23,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.core.SimpleTableModelBuilder;
 import net.morilib.natalia.core.TableModel;
+import net.morilib.natalia.core.TableModelBuilder;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
+import net.morilib.natalia.lba2d.Transition;
 
 /**
  *
@@ -43,8 +49,8 @@ public class TableParser {
 	}
 
 	//
-	static void go(ParserState init, ParserState end, Transition t,
-			Quadro q) {
+	static void go(ParserState init, ParserState end,
+			Transition<Scratch, ParserState> t, Quadro<Scratch> q) {
 		ParserState s = init, p = null;
 		int c = 0;
 
@@ -59,7 +65,7 @@ public class TableParser {
 	}
 
 	//
-	static TableModel parseTable(Quadro q) {
+	static TableModel parseTable(Quadro<Scratch> q) {
 		q.setTableModelBuilder(new SimpleTableModelBuilder());
 		go(ParserState.FSEARCH_INIT, ParserState.FSEARCH_END,
 				FrameSearchTransition.INSTANCE, q);
@@ -72,9 +78,9 @@ public class TableParser {
 	 * @return
 	 */
 	public TableModel parseTable(String s) {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance(s);
+		q = QuadroFactory.newInstance(s, Scratch.NONE);
 		return parseTable(q);
 	}
 
@@ -85,9 +91,10 @@ public class TableParser {
 	 * @throws IOException
 	 */
 	public TableModel parseTable(Reader ins) throws IOException {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance(new BufferedReader(ins));
+		q = QuadroFactory.newInstance(new BufferedReader(ins),
+				Scratch.NONE);
 		return parseTable(q);
 	}
 
@@ -98,10 +105,10 @@ public class TableParser {
 	 * @throws IOException
 	 */
 	public TableModel parseTable(InputStream ins) throws IOException {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(new BufferedReader(
-				new InputStreamReader(ins)));
+				new InputStreamReader(ins)), Scratch.NONE);
 		return parseTable(q);
 	}
 
@@ -150,9 +157,9 @@ public class TableParser {
 	 * @return
 	 */
 	public TableModel parseMySQLOutput(String s) {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance(s);
+		q = QuadroFactory.newInstance(s, Scratch.NONE);
 		return parseMySQLOutput(parseTable(q));
 	}
 
@@ -163,9 +170,10 @@ public class TableParser {
 	 * @throws IOException
 	 */
 	public TableModel parseMySQLOutput(Reader ins) throws IOException {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance(new BufferedReader(ins));
+		q = QuadroFactory.newInstance(new BufferedReader(ins),
+				Scratch.NONE);
 		return parseMySQLOutput(parseTable(q));
 	}
 
@@ -177,10 +185,10 @@ public class TableParser {
 	 */
 	public TableModel parseMySQLOutput(
 			InputStream ins) throws IOException {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(new BufferedReader(
-				new InputStreamReader(ins)));
+				new InputStreamReader(ins)), Scratch.NONE);
 		return parseMySQLOutput(parseTable(q));
 	}
 

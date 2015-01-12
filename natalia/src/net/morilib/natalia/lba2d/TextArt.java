@@ -13,8 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.core.parser;
+package net.morilib.natalia.lba2d;
 
-public class ParserException extends RuntimeException {
+public interface TextArt {
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Pixel get(int row, int column);
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getRows();
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getColumns();
 
 }

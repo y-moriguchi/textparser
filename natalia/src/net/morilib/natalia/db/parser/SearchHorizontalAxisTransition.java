@@ -17,21 +17,25 @@ package net.morilib.natalia.db.parser;
 
 import java.util.EnumSet;
 
-import net.morilib.natalia.core.parser.Quadro;
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
 
 /**
  *
  * @author Yuichiro MORIGUCHI
  */
-public class SearchHorizontalAxisTransition implements Transition {
+public class SearchHorizontalAxisTransition
+implements Transition<Scratch, PS> {
 
-	static final Transition I = new SearchHorizontalAxisTransition();
+	static final Transition<Scratch, PS> I =
+			new SearchHorizontalAxisTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.core.parser.Transition#transit(net.morilib.natalia.core.parser.Quadro, net.morilib.natalia.core.parser.ParserState)
 	 */
 	@Override
-	public PS transit(Quadro q, PS state) {
+	public PS transit(Quadro<Scratch> q, PS state) {
 		switch(state) {
 		case SEARCH_AXIS_INIT:
 			if(q.getScratch().isFrame()) {

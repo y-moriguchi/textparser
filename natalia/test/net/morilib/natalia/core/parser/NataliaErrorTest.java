@@ -15,10 +15,11 @@
  */
 package net.morilib.natalia.core.parser;
 
-import net.morilib.natalia.core.parser.ParserException;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.QuadroFactory;
+import net.morilib.natalia.core.ParserException;
+import net.morilib.natalia.core.Scratch;
 import net.morilib.natalia.core.parser.TableParser;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
 import junit.framework.TestCase;
 
 /**
@@ -26,7 +27,7 @@ import junit.framework.TestCase;
  */
 public class NataliaErrorTest extends TestCase {
 
-	static void err(Quadro q) {
+	static void err(Quadro<Scratch> q) {
 		try {
 			TableParser.parseTable(q);
 			fail();
@@ -36,7 +37,7 @@ public class NataliaErrorTest extends TestCase {
 	}
 
 	public void testE0001() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+-- +---+--+\n" +
@@ -46,12 +47,12 @@ public class NataliaErrorTest extends TestCase {
 				"+---+---+--+\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0002() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -61,12 +62,12 @@ public class NataliaErrorTest extends TestCase {
 				"+---+---+--+\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0003() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -76,12 +77,12 @@ public class NataliaErrorTest extends TestCase {
 				"+---+---+--+\n" +
 				"|   |   |  |\n" +
 				"+---+- -+--+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0004() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -91,12 +92,12 @@ public class NataliaErrorTest extends TestCase {
 				"+---+---+--+\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0005() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -106,12 +107,12 @@ public class NataliaErrorTest extends TestCase {
 				"    +---+--+\n" +
 				"    |   |  |\n" +
 				"    +---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0006() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -121,23 +122,23 @@ public class NataliaErrorTest extends TestCase {
 				"    +---+--+\n" +
 				"    |   |  |\n" +
 				"    +---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0007() {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+\n" +
-				"");
+				"", Scratch.NONE);
 		err(q);
 	}
 
 	public void testE0008() {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance("");
+		q = QuadroFactory.newInstance("", Scratch.NONE);
 		err(q);
 	}
 

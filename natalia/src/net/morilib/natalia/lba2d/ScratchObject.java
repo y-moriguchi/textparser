@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.core.parser;
+package net.morilib.natalia.lba2d;
 
-import java.util.EnumSet;
-
-public interface Transition {
-
-	/**
-	 * 
-	 * @param q
-	 * @param state
-	 * @return
-	 */
-	public ParserState transit(Quadro q, ParserState state);
+/**
+ *
+ * @author Yuichiro MORIGUCHI
+ */
+public interface ScratchObject {
 
 	/**
 	 * 
 	 * @return
 	 */
-	public EnumSet<ParserState> getStates();
+	public ScratchObject getZero();
 
 }

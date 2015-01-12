@@ -15,10 +15,11 @@
  */
 package net.morilib.natalia.core.parser;
 
+import net.morilib.natalia.core.Scratch;
 import net.morilib.natalia.core.TableModel;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.QuadroFactory;
 import net.morilib.natalia.core.parser.TableParser;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
 import junit.framework.TestCase;
 
 /**
@@ -28,7 +29,7 @@ public class NataliaMultibyteTest extends TestCase {
 
 	public void testA0002() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -38,7 +39,7 @@ public class NataliaMultibyteTest extends TestCase {
 				"+---+---+--+\n" +
 				"|や |よ |い|\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = TableParser.parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());

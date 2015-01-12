@@ -17,19 +17,25 @@ package net.morilib.natalia.core.parser;
 
 import java.util.EnumSet;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
+
 /**
  *
  */
-public class FrameMainTransition implements Transition {
+public class FrameMainTransition
+implements Transition<Scratch, ParserState> {
 
 	//
-	static final Transition INSTANCE = new FrameMainTransition();
+	static final Transition<Scratch, ParserState> INSTANCE =
+			new FrameMainTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.Transition#transit(net.morilib.natalia.Quadro, net.morilib.natalia.ParserState)
 	 */
 	@Override
-	public ParserState transit(Quadro q, ParserState state) {
+	public ParserState transit(Quadro<Scratch> q, ParserState state) {
 		switch(state) {
 		case FMAIN_INIT:
 			return ParserState.FRAME_INIT;

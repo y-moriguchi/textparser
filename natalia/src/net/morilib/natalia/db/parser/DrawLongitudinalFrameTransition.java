@@ -17,23 +17,26 @@ package net.morilib.natalia.db.parser;
 
 import java.util.EnumSet;
 
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.Scratch;
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
 
 /**
  *
  * @author Yuichiro MORIGUCHI
  */
-public class DrawLongitudinalFrameTransition implements Transition {
+public class DrawLongitudinalFrameTransition
+implements Transition<Scratch, PS> {
 
 	//
-	static final Transition I = new DrawLongitudinalFrameTransition();
+	static final Transition<Scratch, PS> I =
+			new DrawLongitudinalFrameTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.db.parser.Transition#transit(net.morilib.natalia.core.parser.Quadro, net.morilib.natalia.db.parser.PS)
 	 */
 	@Override
-	public PS transit(Quadro q, PS state) {
+	public PS transit(Quadro<Scratch> q, PS state) {
 		switch(state) {
 		case DRAW_LONG_FRAME_INIT:
 			q.mark(this);

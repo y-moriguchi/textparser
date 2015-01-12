@@ -15,12 +15,13 @@
  */
 package net.morilib.natalia.core.parser;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.core.SimpleTableModelBuilder;
 import net.morilib.natalia.core.TableModel;
 import net.morilib.natalia.core.parser.ParserState;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.QuadroFactory;
-import net.morilib.natalia.core.parser.SimpleTableModelBuilder;
-import net.morilib.natalia.core.parser.Transition;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
+import net.morilib.natalia.lba2d.Transition;
 import junit.framework.TestCase;
 
 /**
@@ -32,8 +33,8 @@ public class NataliaSearchTest extends TestCase {
 	private static final int INFINITE_LOOP = 100;
 
 	//
-	static void go(ParserState init, ParserState end, Transition t,
-			Quadro q) {
+	static void go(ParserState init, ParserState end,
+			Transition<Scratch, ParserState> t, Quadro<Scratch> q) {
 		ParserState s = init, p = null;
 		int c = 0;
 
@@ -54,7 +55,7 @@ public class NataliaSearchTest extends TestCase {
 	}
 
 	//
-	static TableModel parseTable(Quadro q) {
+	static TableModel parseTable(Quadro<Scratch> q) {
 		q.setTableModelBuilder(new SimpleTableModelBuilder());
 		go(ParserState.FSEARCH_INIT, ParserState.FSEARCH_END,
 				FrameSearchTransition.INSTANCE, q);
@@ -63,7 +64,7 @@ public class NataliaSearchTest extends TestCase {
 
 	public void testA0001() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				" a += 1       \n" +
@@ -75,7 +76,7 @@ public class NataliaSearchTest extends TestCase {
 				"  |31 |32 |33|\n" +
 				"  |   |   |  |\n" +
 				"  +---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());

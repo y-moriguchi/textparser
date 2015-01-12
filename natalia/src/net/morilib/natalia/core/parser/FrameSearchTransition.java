@@ -17,22 +17,39 @@ package net.morilib.natalia.core.parser;
 
 import java.util.EnumSet;
 
+import net.morilib.natalia.core.ParserException;
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
+
 /**
  *
  * @author Yuichiro MORIGUCHI
  */
-public class FrameSearchTransition implements Transition {
+public class FrameSearchTransition
+implements Transition<Scratch, ParserState> {
 
 	//
-	static final Transition INSTANCE = new FrameSearchTransition();
+	static final Transition<Scratch, ParserState> INSTANCE =
+			new FrameSearchTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.core.parser.Transition#transit(net.morilib.natalia.core.parser.Quadro, net.morilib.natalia.core.parser.ParserState)
 	 */
 	@Override
-	public ParserState transit(Quadro q, ParserState state) {
+	public ParserState transit(Quadro<Scratch> q, ParserState state) {
 		switch(state) {
 		case FSEARCH_INIT:
+			if(q.get().isJunction()) {
+				q.moveEast();
+				return ParserState.FSEARCH_FIND1;
+			} else if(q.get().isBound()) {
+				throw new ParserException();
+			} else {
+				q.moveEast();
+				return ParserState.FSEARCH_FIND0;
+			}
+		case FSEARCH_FIND0:
 			if(q.get().isJunction()) {
 				q.moveEast();
 				return ParserState.FSEARCH_FIND1;

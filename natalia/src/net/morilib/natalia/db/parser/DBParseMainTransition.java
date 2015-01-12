@@ -17,22 +17,26 @@ package net.morilib.natalia.db.parser;
 
 import java.util.EnumSet;
 
-import net.morilib.natalia.core.parser.Quadro;
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
 
 /**
  *
  * @author Yuichiro MORIGUCHI
  */
-public class DBParseMainTransition implements Transition {
+public class DBParseMainTransition
+implements Transition<Scratch, PS> {
 
 	//
-	static final Transition I = new DBParseMainTransition();
+	static final Transition<Scratch, PS> I =
+			new DBParseMainTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.db.parser.Transition#transit(net.morilib.natalia.core.parser.Quadro, net.morilib.natalia.db.parser.PS)
 	 */
 	@Override
-	public PS transit(Quadro q, PS state) {
+	public PS transit(Quadro<Scratch> q, PS state) {
 		switch(state) {
 		case POSTGRES_MAIN_INIT:
 			return PS.SEARCH_AXIS_INIT;

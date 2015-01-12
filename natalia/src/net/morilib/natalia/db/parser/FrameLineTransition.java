@@ -17,16 +17,19 @@ package net.morilib.natalia.db.parser;
 
 import java.util.EnumSet;
 
-import net.morilib.natalia.core.parser.ParserException;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.Scratch;
+import net.morilib.natalia.core.ParserException;
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
 
-public class FrameLineTransition implements Transition {
+public class FrameLineTransition
+implements Transition<Scratch, PS> {
 
 	//
-	static final Transition I = new FrameLineTransition();
+	static final Transition<Scratch, PS> I =
+			new FrameLineTransition();
 
-	public PS transit(Quadro q, PS state) {
+	public PS transit(Quadro<Scratch> q, PS state) {
 		Scratch s;
 
 		switch(state) {

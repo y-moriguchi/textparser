@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.core.parser;
+package net.morilib.natalia.core;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import net.morilib.natalia.core.TableCell;
-import net.morilib.natalia.core.TableModel;
 
 /**
  *

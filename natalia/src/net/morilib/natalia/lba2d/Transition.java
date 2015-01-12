@@ -13,30 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.core.parser;
+package net.morilib.natalia.lba2d;
 
-import net.morilib.natalia.core.TableModel;
+import java.util.EnumSet;
 
-/**
- *
- */
-public interface TableModelBuilder {
+public interface Transition<S, P extends Enum<P>> {
 
 	/**
 	 * 
-	 * @param row
-	 * @param col
-	 * @param rowspan
-	 * @param colspan
-	 * @param text
+	 * @param q
+	 * @param state
+	 * @return
 	 */
-	public void appendCell(int row, int col, int rowspan, int colspan,
-			String text);
+	public P transit(Quadro<S> q, P state);
 
 	/**
 	 * 
 	 * @return
 	 */
-	public TableModel toTableModel();
+	public EnumSet<P> getStates();
 
 }

@@ -17,16 +17,22 @@ package net.morilib.natalia.core.parser;
 
 import java.util.EnumSet;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
+
 /**
  * 
  */
-public class TraverseWallTransition implements Transition {
+public class TraverseWallTransition
+implements Transition<Scratch, ParserState> {
 
 	//
-	static final Transition INSTANCE = new TraverseWallTransition();
+	static final Transition<Scratch, ParserState> INSTANCE =
+			new TraverseWallTransition();
 
 	@Override
-	public ParserState transit(Quadro q, ParserState state) {
+	public ParserState transit(Quadro<Scratch> q, ParserState state) {
 		switch(state) {
 		case TWALL_INIT:
 			q.setScratch(q.getScratch().add(Scratch.BORDER_CROSSING));

@@ -15,13 +15,14 @@
  */
 package net.morilib.natalia.core.parser;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.core.SimpleTableModelBuilder;
 import net.morilib.natalia.core.TableModel;
 import net.morilib.natalia.core.parser.FrameMainTransition;
 import net.morilib.natalia.core.parser.ParserState;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.QuadroFactory;
-import net.morilib.natalia.core.parser.SimpleTableModelBuilder;
-import net.morilib.natalia.core.parser.Transition;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
+import net.morilib.natalia.lba2d.Transition;
 import junit.framework.TestCase;
 
 /**
@@ -33,8 +34,8 @@ public class NataliaParserTest extends TestCase {
 	private static final int INFINITE_LOOP = 100;
 
 	//
-	static void go(ParserState init, ParserState end, Transition t,
-			Quadro q) {
+	static void go(ParserState init, ParserState end,
+			Transition<Scratch, ParserState> t, Quadro<Scratch> q) {
 		ParserState s = init, p = null;
 		int c = 0;
 
@@ -55,7 +56,7 @@ public class NataliaParserTest extends TestCase {
 	}
 
 	//
-	static TableModel parseTable(Quadro q) {
+	static TableModel parseTable(Quadro<Scratch> q) {
 		q.setTableModelBuilder(new SimpleTableModelBuilder());
 		go(ParserState.FMAIN_INIT, ParserState.FMAIN_END,
 				FrameMainTransition.INSTANCE, q);
@@ -64,7 +65,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0001() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+-------+-------+\n" +
@@ -72,7 +73,7 @@ public class NataliaParserTest extends TestCase {
 				"+-------+-------+\n" +
 				"|c      |d      |\n" +
 				"+-------+-------+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 2, t.rowSize());
 		assertEquals(q.toString(), 2, t.columnSize());
@@ -84,7 +85,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0002() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -95,7 +96,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -112,7 +113,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0003() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -125,7 +126,7 @@ public class NataliaParserTest extends TestCase {
 				"+---+---+--+\n" +
 				"|41 |42 |43|\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 4, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -145,13 +146,13 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0004() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
 				"|11 |12 |13|\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 1, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -162,7 +163,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0005() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+\n" +
@@ -175,7 +176,7 @@ public class NataliaParserTest extends TestCase {
 				"+---+\n" +
 				"|41 |\n" +
 				"+---+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 4, t.rowSize());
 		assertEquals(q.toString(), 1, t.columnSize());
@@ -187,7 +188,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0006() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+-------+--+\n" +
@@ -198,7 +199,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -215,7 +216,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0007() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -226,7 +227,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -243,7 +244,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0008() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -254,7 +255,7 @@ public class NataliaParserTest extends TestCase {
 				"|31     |33|\n" +
 				"|       |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -271,7 +272,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0009() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+----------+\n" +
@@ -282,7 +283,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -299,7 +300,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0010() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -310,7 +311,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -327,7 +328,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0011() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -338,7 +339,7 @@ public class NataliaParserTest extends TestCase {
 				"|31        |\n" +
 				"|          |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -355,7 +356,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0012() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -366,7 +367,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -383,7 +384,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0013() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -394,7 +395,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -411,7 +412,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0014() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -422,7 +423,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -439,7 +440,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0015() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -450,7 +451,7 @@ public class NataliaParserTest extends TestCase {
 				"|   |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -467,7 +468,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0016() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -478,7 +479,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |   |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -495,7 +496,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0017() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -506,7 +507,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |  |\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -523,7 +524,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0018() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+------+\n" +
@@ -534,7 +535,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -551,7 +552,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0019() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -562,7 +563,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -579,7 +580,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0020() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -590,7 +591,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32    |\n" +
 				"|   |      |\n" +
 				"+---+------+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -607,7 +608,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0021() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+-------+--+\n" +
@@ -618,7 +619,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -635,7 +636,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0022() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -646,7 +647,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |      |\n" +
 				"|   |      |\n" +
 				"+---+------+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -663,7 +664,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0023() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+------+\n" +
@@ -674,7 +675,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -691,7 +692,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0024() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -702,7 +703,7 @@ public class NataliaParserTest extends TestCase {
 				"|       |33|\n" +
 				"|       |  |\n" +
 				"+-------+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -719,7 +720,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0025() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+------+\n" +
@@ -730,7 +731,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32    |\n" +
 				"|   |      |\n" +
 				"+---+------+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -747,7 +748,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0026() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+-------+--+-----+\n" +
@@ -761,7 +762,7 @@ public class NataliaParserTest extends TestCase {
 				"|       +--+     |\n" +
 				"|       |53|     |\n" +
 				"+-------+--+-----+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 5, t.rowSize());
 		assertEquals(q.toString(), 5, t.columnSize());
@@ -794,7 +795,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0027() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+--+--+\n" +
@@ -808,7 +809,7 @@ public class NataliaParserTest extends TestCase {
 				"+---+---+--+--+--+\n" +
 				"|51 |52 |53|54|55|\n" +
 				"+---+---+--+--+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 5, t.rowSize());
 		assertEquals(q.toString(), 5, t.columnSize());
@@ -841,7 +842,7 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0028() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+---+--+\n" +
@@ -852,7 +853,7 @@ public class NataliaParserTest extends TestCase {
 				"|31 |32 |33|\n" +
 				"|   |   |  |\n" +
 				"+---+---+--+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -869,13 +870,13 @@ public class NataliaParserTest extends TestCase {
 
 	public void testA0029() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+---+\n" +
 				"|11 |\n" +
 				"+---+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 1, t.rowSize());
 		assertEquals(q.toString(), 1, t.columnSize());

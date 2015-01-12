@@ -13,9 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.core.parser;
+package net.morilib.natalia.lba2d;
 
-public interface Quadro {
+import net.morilib.natalia.core.TableModelBuilder;
+
+public interface Quadro<S> {
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Quadro<S> fork();
 
 	/**
 	 * 
@@ -27,92 +35,92 @@ public interface Quadro {
 	 * 
 	 * @return
 	 */
-	public Scratch getScratch();
+	public S getScratch();
 
 	/**
 	 * 
 	 * @param x
 	 * @return
 	 */
-	public Quadro setScratch(Scratch x);
+	public Quadro<S> setScratch(S x);
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro moveNorth();
+	public Quadro<S> moveNorth();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro moveEast();
+	public Quadro<S> moveEast();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro moveSouth();
+	public Quadro<S> moveSouth();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro moveWest();
+	public Quadro<S> moveWest();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro crlf();
+	public Quadro<S> crlf();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro forward();
+	public Quadro<S> forward();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro turnNorth();
+	public Quadro<S> turnNorth();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro turnEast();
+	public Quadro<S> turnEast();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro turnSouth();
+	public Quadro<S> turnSouth();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro turnWest();
+	public Quadro<S> turnWest();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro turnLeft();
+	public Quadro<S> turnLeft();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro turnRight();
+	public Quadro<S> turnRight();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Quadro back();
+	public Quadro<S> back();
 
 	/**
 	 * 
@@ -155,7 +163,7 @@ public interface Quadro {
 	 * @param o
 	 * @return
 	 */
-	public Quadro mark(Object o);
+	public Quadro<S> mark(Object o);
 
 	/**
 	 * 
@@ -186,14 +194,14 @@ public interface Quadro {
 	 * 
 	 * @return
 	 */
-	public Quadro clearTextRegister();
+	public Quadro<S> clearTextRegister();
 
 	/**
 	 * 
 	 * @param c
 	 * @return
 	 */
-	public Quadro appendTextRegister(int c);
+	public Quadro<S> appendTextRegister(int c);
 
 	/**
 	 * 
@@ -211,7 +219,7 @@ public interface Quadro {
 	 * 
 	 * @return
 	 */
-	public Quadro setRowRegister(int x);
+	public Quadro<S> setRowRegister(int x);
 
 	/**
 	 * 
@@ -223,7 +231,7 @@ public interface Quadro {
 	 * 
 	 * @return
 	 */
-	public Quadro setColumnRegister(int x);
+	public Quadro<S> setColumnRegister(int x);
 
 	/**
 	 * 
@@ -235,7 +243,7 @@ public interface Quadro {
 	 * 
 	 * @return
 	 */
-	public Quadro setRowSpanRegister(int x);
+	public Quadro<S> setRowSpanRegister(int x);
 
 	/**
 	 * 
@@ -247,7 +255,7 @@ public interface Quadro {
 	 * 
 	 * @return
 	 */
-	public Quadro setColumnSpanRegister(int x);
+	public Quadro<S> setColumnSpanRegister(int x);
 
 	/**
 	 * 
@@ -258,7 +266,7 @@ public interface Quadro {
 	/**
 	 * 
 	 */
-	public Quadro setTableModelBuilder(TableModelBuilder x);
+	public Quadro<S> setTableModelBuilder(TableModelBuilder x);
 
 	/**
 	 * 

@@ -23,10 +23,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.core.SimpleTableModelBuilder;
 import net.morilib.natalia.core.TableModel;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.QuadroFactory;
-import net.morilib.natalia.core.parser.SimpleTableModelBuilder;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
+import net.morilib.natalia.lba2d.Transition;
 
 /**
  *
@@ -46,7 +48,8 @@ public class DBTextParser {
 	}
 
 	//
-	static void go(PS init, PS end, Transition t, Quadro q) {
+	static void go(PS init, PS end, Transition<Scratch, PS> t,
+			Quadro<Scratch> q) {
 		PS s = init, p = null;
 		int c = 0;
 
@@ -61,7 +64,7 @@ public class DBTextParser {
 	}
 
 	//
-	static TableModel parseDBText(Quadro q) {
+	static TableModel parseDBText(Quadro<Scratch> q) {
 		q.setTableModelBuilder(new SimpleTableModelBuilder());
 		go(PS.POSTGRES_MAIN_INIT, PS.POSTGRES_MAIN_END,
 				DBParseMainTransition.I, q);
@@ -74,9 +77,9 @@ public class DBTextParser {
 	 * @return
 	 */
 	public TableModel parseDBText(String s) {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance(s);
+		q = QuadroFactory.newInstance(s, Scratch.NONE);
 		return parseDBText(q);
 	}
 
@@ -87,9 +90,10 @@ public class DBTextParser {
 	 * @throws IOException
 	 */
 	public TableModel parseDBText(Reader ins) throws IOException {
-		Quadro q;
+		Quadro<Scratch> q;
 
-		q = QuadroFactory.newInstance(new BufferedReader(ins));
+		q = QuadroFactory.newInstance(new BufferedReader(ins),
+				Scratch.NONE);
 		return parseDBText(q);
 	}
 
@@ -100,10 +104,10 @@ public class DBTextParser {
 	 * @throws IOException
 	 */
 	public TableModel parseDBText(InputStream ins) throws IOException {
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(new BufferedReader(
-				new InputStreamReader(ins)));
+				new InputStreamReader(ins)), Scratch.NONE);
 		return parseDBText(q);
 	}
 

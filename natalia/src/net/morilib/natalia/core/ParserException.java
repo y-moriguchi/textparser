@@ -13,26 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.natalia.db.parser;
+package net.morilib.natalia.core;
 
-import java.util.EnumSet;
-
-import net.morilib.natalia.core.parser.Quadro;
-
-public interface Transition {
-
-	/**
-	 * 
-	 * @param q
-	 * @param state
-	 * @return
-	 */
-	public PS transit(Quadro q, PS state);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public EnumSet<PS> getStates();
+public class ParserException extends RuntimeException {
 
 }

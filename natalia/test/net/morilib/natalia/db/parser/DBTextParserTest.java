@@ -15,10 +15,12 @@
  */
 package net.morilib.natalia.db.parser;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.core.SimpleTableModelBuilder;
 import net.morilib.natalia.core.TableModel;
-import net.morilib.natalia.core.parser.Quadro;
-import net.morilib.natalia.core.parser.QuadroFactory;
-import net.morilib.natalia.core.parser.SimpleTableModelBuilder;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.QuadroFactory;
+import net.morilib.natalia.lba2d.Transition;
 import junit.framework.TestCase;
 
 /**
@@ -30,7 +32,8 @@ public class DBTextParserTest extends TestCase {
 	private static final int INFINITE_LOOP = 100;
 
 	//
-	static void go(PS init, PS end, Transition t, Quadro q) {
+	static void go(PS init, PS end, Transition<Scratch, PS> t,
+			Quadro<Scratch> q) {
 		PS s = init, p = null;
 		int c = 0;
 
@@ -51,7 +54,7 @@ public class DBTextParserTest extends TestCase {
 	}
 
 	//
-	static TableModel parseTable(Quadro q) {
+	static TableModel parseTable(Quadro<Scratch> q) {
 		q.setTableModelBuilder(new SimpleTableModelBuilder());
 		go(PS.POSTGRES_MAIN_INIT, PS.POSTGRES_MAIN_END,
 				DBParseMainTransition.I, q);
@@ -60,7 +63,7 @@ public class DBTextParserTest extends TestCase {
 
 	public void testA0001() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				" aa | bb | cc \n" +
@@ -68,7 +71,7 @@ public class DBTextParserTest extends TestCase {
 				" 11 | 12 | 13 \n" +
 				" 21 | 22 | 23 \n" +
 				" 31 | 32 | 33 \n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -88,7 +91,7 @@ public class DBTextParserTest extends TestCase {
 
 	public void testA0002() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+----+----+----+\n" +
@@ -98,7 +101,7 @@ public class DBTextParserTest extends TestCase {
 				"| 21 | 22 | 23 |\n" +
 				"| 31 | 32 | 33 |\n" +
 				"+----+----+----+\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -118,7 +121,7 @@ public class DBTextParserTest extends TestCase {
 
 	public void testA0003() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"  id  |       name       | b  \n" +
@@ -127,7 +130,7 @@ public class DBTextParserTest extends TestCase {
 				" 0002 | KISARAGI Chihaya | 72 \n" +
 				" 0003 | MIURA Azusa      | 91 \n" +
 				"(3 rows) \n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(q.toString(), 3, t.rowSize());
 		assertEquals(q.toString(), 3, t.columnSize());
@@ -147,7 +150,7 @@ public class DBTextParserTest extends TestCase {
 
 	public void testA0004() {
 		TableModel t;
-		Quadro q;
+		Quadro<Scratch> q;
 
 		q = QuadroFactory.newInstance(
 				"+------+------------------+------+\n" +
@@ -158,7 +161,7 @@ public class DBTextParserTest extends TestCase {
 				"| 0003 | MIURA Azusa      |   91 |\n" +
 				"+------+------------------+------+\n" +
 				"3 rows in set (0.07 sec)\n" +
-				"");
+				"", Scratch.NONE);
 		t = parseTable(q);
 		assertEquals(3, t.rowSize());
 		assertEquals(3, t.columnSize());

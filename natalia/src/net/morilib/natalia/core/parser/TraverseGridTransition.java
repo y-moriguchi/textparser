@@ -17,19 +17,25 @@ package net.morilib.natalia.core.parser;
 
 import java.util.EnumSet;
 
+import net.morilib.natalia.core.Scratch;
+import net.morilib.natalia.lba2d.Quadro;
+import net.morilib.natalia.lba2d.Transition;
+
 /**
  *
  */
-public class TraverseGridTransition implements Transition {
+public class TraverseGridTransition
+implements Transition<Scratch, ParserState> {
 
 	//
-	static final Transition INSTANCE = new TraverseGridTransition();
+	static final Transition<Scratch, ParserState> INSTANCE =
+			new TraverseGridTransition();
 
 	/* (non-Javadoc)
 	 * @see net.morilib.natalia.Transition#transit(net.morilib.natalia.Quadro, net.morilib.natalia.ParserState)
 	 */
 	@Override
-	public ParserState transit(Quadro q, ParserState state) {
+	public ParserState transit(Quadro<Scratch> q, ParserState state) {
 		switch(state) {
 		case TGRID_INIT:
 			q.setColumnRegister(1);
