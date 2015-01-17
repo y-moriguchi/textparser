@@ -13,56 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.automata;
-
-import java.util.Set;
-
-import net.morilib.range.Range;
+package net.morilib.automata.misc;
 
 /**
+ * An interface represents maps simply.
+ * <p>単純な写像の概念を抽象化したインターフェースです。
  * 
  * 
- * @author MORIGUCHI, Yuichiro 2006/07/13
+ * @author MORIGUCHI, Yuichiro 2010/04/18
  */
-public interface NFAEdges<T> {
-
+public interface SimpleMap<K, V> {
+	
 	/**
+	 * maps the given key to the value.
+	 * <p>与えられたキーを値に写像します。
 	 * 
-	 * @param alphabet
-	 * @return
+	 * @param key key to be mapped
+	 * @return the value
 	 */
-	public Set<NFAState> goNext(T alphabet);
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(int alphabet);
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(char alphabet);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<NFAState> goNextEpsilon();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<? extends Range> nextAlphabets();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean isNextEpsilon();
-
+	public V map(K key);
+	
 }

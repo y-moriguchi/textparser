@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedSet;
 
-import net.morilib.natalia.range.Interval;
+import net.morilib.range.Interval;
 
 /*package*/ final class RangeTree implements Iterable<Interval> {
 	

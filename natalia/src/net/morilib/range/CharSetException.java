@@ -13,56 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.automata;
+package net.morilib.range;
 
-import java.util.Set;
-
-import net.morilib.range.Range;
-
-/**
- * 
- * 
- * @author MORIGUCHI, Yuichiro 2006/07/13
- */
-public interface NFAEdges<T> {
+public class CharSetException extends RuntimeException {
 
 	/**
 	 * 
-	 * @param alphabet
-	 * @return
 	 */
-	public Set<NFAState> goNext(T alphabet);
+	private static final long serialVersionUID = -2506076920879308461L;
 
 	/**
 	 * 
-	 * @param alphabet
-	 * @return
 	 */
-	public Set<NFAState> goNext(int alphabet);
+	public CharSetException() {
+		super();
+	}
 
 	/**
-	 * 
-	 * @param alphabet
-	 * @return
+	 * @param message
 	 */
-	public Set<NFAState> goNext(char alphabet);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<NFAState> goNextEpsilon();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<? extends Range> nextAlphabets();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean isNextEpsilon();
+	public CharSetException(String message) {
+		super(message);
+	}
 
 }

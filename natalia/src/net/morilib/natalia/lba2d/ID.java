@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Yuichiro Moriguchi
+ * Copyright 2015 Yuichiro Moriguchi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,56 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.morilib.automata;
-
-import java.util.Set;
-
-import net.morilib.range.Range;
+package net.morilib.natalia.lba2d;
 
 /**
- * 
- * 
- * @author MORIGUCHI, Yuichiro 2006/07/13
+ *
+ * @author Yuichiro MORIGUCHI
  */
-public interface NFAEdges<T> {
+public class ID<S, P> {
+
+	//
+	private Quadro<S> quadro;
+	private P state;
 
 	/**
 	 * 
-	 * @param alphabet
-	 * @return
+	 * @param q
+	 * @param s
 	 */
-	public Set<NFAState> goNext(T alphabet);
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(int alphabet);
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(char alphabet);
+	public ID(Quadro<S> q, P s) {
+		quadro = q;
+		state  = s;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Set<NFAState> goNextEpsilon();
+	public Quadro<S> getQuadro() {
+		return quadro;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Set<? extends Range> nextAlphabets();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean isNextEpsilon();
+	public P getState() {
+		return state;
+	}
 
 }

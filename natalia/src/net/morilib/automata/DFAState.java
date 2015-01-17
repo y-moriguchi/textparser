@@ -17,7 +17,7 @@ package net.morilib.automata;
 
 import java.util.Set;
 
-import net.morilib.natalia.range.Interval;
+import net.morilib.range.Interval;
 
 /**
  * 

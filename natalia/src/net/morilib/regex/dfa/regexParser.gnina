@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<minette>
+<start-anchor no="0" name="state0" type="" priority="" accept="false" x="35" y="29" w="55" h="23">
+<transition to="1" style=""></transition>
+<action><![CDATA[
+main
+]]></action>
+</start-anchor>
+<state no="1" name="State58" type="" priority="" accept="false" x="134" y="32" w="-1" h="-1">
+<transition to="2" style=""></transition>
+<action><![CDATA[
+_pushf();
+]]></action>
+</state>
+<subautomaton no="2" name="State44" type="" priority="" accept="false" x="230" y="31" w="-1" h="-1">
+<transition to="3" style=""></transition>
+<action><![CDATA[
+alternate
+]]></action>
+</subautomaton>
+<state no="3" name="State45" type="" priority="" accept="true" x="325" y="31" w="-1" h="-1">
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<subautomaton no="4" name="newState3" type="" priority="" accept="false" x="150" y="120" w="88" h="17">
+<transition to="5" style="133,175"></transition>
+<action><![CDATA[
+concat
+]]></action>
+</subautomaton>
+<state no="5" name="firstSel" type="NFAObject&lt;Object, NFAState, Integer&gt;" priority="" accept="true" x="169" y="162" w="75" h="23">
+<transition to="6" style="">|</transition>
+<action><![CDATA[
+%% = _;
+]]></action>
+</state>
+<subautomaton no="6" name="newState6" type="" priority="" accept="false" x="278" y="112" w="82" h="17">
+<transition to="7" style="574,170"></transition>
+<action><![CDATA[
+concat
+]]></action>
+</subautomaton>
+<state no="7" name="newState7" type="" priority="" accept="true" x="308" y="161" w="220" h="21">
+<transition to="6" style="">|</transition>
+<action><![CDATA[
+%{firstSel} = _ = alt(${firstSel}, _);
+]]></action>
+</state>
+<start-anchor no="8" name="concat" type="" priority="" accept="false" x="34" y="214" w="63" h="17">
+<transition to="9" style=""></transition>
+<action><![CDATA[
+concat
+]]></action>
+</start-anchor>
+<subautomaton no="9" name="newState9" type="" priority="" accept="false" x="148" y="209" w="84" h="18">
+<transition to="10" style="117,269"></transition>
+<action><![CDATA[
+closure
+]]></action>
+</subautomaton>
+<state no="10" name="firstCat" type="NFAObject&lt;Object, NFAState, Integer&gt;" priority="" accept="true" x="162" y="256" w="72" h="22">
+<transition to="11" style="258,209">${NONDELIM}/&apos;UNGET($c);&apos;</transition>
+<action><![CDATA[
+%% = _;
+]]></action>
+</state>
+<subautomaton no="11" name="newState11" type="" priority="" accept="false" x="415" y="200" w="86" h="17">
+<transition to="12" style="318,270"></transition>
+<action><![CDATA[
+closure
+]]></action>
+</subautomaton>
+<state no="12" name="newState12" type="" priority="" accept="true" x="380" y="258" w="223" h="23">
+<transition to="11" style="384,254">${NONDELIM}/&apos;UNGET($c);&apos;</transition>
+<action><![CDATA[
+%{firstCat} = _ = cat(${firstCat}, _);
+]]></action>
+</state>
+<start-anchor no="13" name="closure" type="" priority="" accept="false" x="37" y="333" w="59" h="25">
+<transition to="14" style=""></transition>
+<action><![CDATA[
+closure
+]]></action>
+</start-anchor>
+<subautomaton no="14" name="newState14" type="" priority="" accept="false" x="161" y="336" w="72" h="24">
+<transition to="15" style=""></transition>
+<action><![CDATA[
+elem
+]]></action>
+</subautomaton>
+<state no="15" name="firstClo" type="NFAObject&lt;Object, NFAState, Integer&gt;" priority="" accept="true" x="305" y="332" w="81" h="30">
+<transition to="16" style="">*</transition>
+<transition to="17" style="">+</transition>
+<transition to="18" style="">?</transition>
+<transition to="19" style="">{</transition>
+<action><![CDATA[
+%% = _;
+]]></action>
+</state>
+<state no="17" name="State20" type="" priority="" accept="true" x="430" y="358" w="132" h="24">
+<action><![CDATA[
+_ = plus(${firstClo});
+]]></action>
+</state>
+<state no="16" name="newState15" type="" priority="" accept="true" x="421" y="296" w="131" h="24">
+<action><![CDATA[
+_ = clo(${firstClo});
+]]></action>
+</state>
+<state no="19" name="State27" type="" priority="" accept="false" x="111" y="427" w="-1" h="-1">
+<transition to="20" style="">:digits-4</transition>
+<transition to="21" style="">,</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="18" name="State21" type="" priority="" accept="true" x="176" y="295" w="119" h="22">
+<action><![CDATA[
+_ = opt(${firstClo});
+]]></action>
+</state>
+<state no="21" name="State29" type="" priority="" accept="false" x="275" y="383" w="-1" h="-1">
+<transition to="22" style="">:digits-4</transition>
+<action><![CDATA[
+rn = 0;
+]]></action>
+</state>
+<state no="20" name="State28" type="" priority="" accept="false" x="237" y="427" w="-1" h="-1">
+<transition to="23" style="">,</transition>
+<action><![CDATA[
+rn = $int;
+]]></action>
+</state>
+<state no="23" name="State30" type="" priority="" accept="false" x="339" y="427" w="-1" h="-1">
+<transition to="22" style="">:digits-4</transition>
+<transition to="24" style="">}</transition>
+<action><![CDATA[
+$int = -1;
+]]></action>
+</state>
+<state no="22" name="State31" type="" priority="" accept="false" x="378" y="384" w="-1" h="-1">
+<transition to="24" style="">}</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="25" name="newState17" type="" priority="" accept="true" x="751" y="259" w="98" h="19">
+<action><![CDATA[
+_ = atom($c);
+]]></action>
+</state>
+<state no="24" name="State32" type="" priority="" accept="true" x="437" y="427" w="-1" h="-1">
+<action><![CDATA[
+_ = rep(${firstClo}, rn, $int);
+]]></action>
+</state>
+<state no="26" name="newState19" type="" priority="" accept="true" x="1035" y="150" w="73" h="21">
+<action><![CDATA[
+_ = par(_);
+]]></action>
+</state>
+<subautomaton no="27" name="newState18" type="" priority="" accept="false" x="915" y="149" w="67" h="19">
+<transition to="26" style="">)</transition>
+<action><![CDATA[
+main
+]]></action>
+</subautomaton>
+<state no="28" name="State24" type="" priority="" accept="false" x="649" y="556" w="134" h="17">
+<transition to="29" style="715,614">.</transition>
+<action><![CDATA[
+b.append((char)$c);
+]]></action>
+</state>
+<state no="29" name="State23" type="" priority="" accept="true" x="815" y="559" w="131" h="17">
+<transition to="28" style="">&apos;\\&apos;</transition>
+<transition to="29" style="863,592-880,591">[^\[\]]</transition>
+<transition to="30" style="">[</transition>
+<action><![CDATA[
+b.append((char)$c);
+]]></action>
+</state>
+<subautomaton no="31" name="State53" type="" priority="" accept="false" x="969" y="478" w="-1" h="-1">
+<transition to="32" style="">]</transition>
+<action><![CDATA[
+cset
+]]></action>
+</subautomaton>
+<state no="30" name="State52" type="" priority="" accept="false" x="820" y="477" w="-1" h="-1">
+<transition to="31" style=""></transition>
+<action><![CDATA[
+b.append((char)$c);
+]]></action>
+</state>
+<state no="33" name="State35" type="" priority="" accept="true" x="859" y="315" w="-1" h="-1">
+<action><![CDATA[
+_ = atom($int);
+]]></action>
+</state>
+<state no="34" name="State38" type="" priority="" accept="true" x="632" y="416" w="-1" h="-1">
+<action><![CDATA[
+_ = esc($c);
+]]></action>
+</state>
+<state no="32" name="State54" type="" priority="" accept="true" x="1053" y="475" w="-1" h="-1">
+<transition to="29" style=""></transition>
+<action><![CDATA[
+b.append((char)$c);
+]]></action>
+</state>
+<state no="35" name="State37" type="" priority="" accept="true" x="861" y="355" w="-1" h="-1">
+<action><![CDATA[
+_ = atom($int);
+]]></action>
+</state>
+<state no="36" name="State41" type="" priority="" accept="false" x="976" y="419" w="-1" h="-1">
+<transition to="36" style="1103,415-1104,428">.</transition>
+<transition to="37" style="">}</transition>
+<action><![CDATA[
+b.append((char)$c);
+]]></action>
+</state>
+<state no="37" name="State42" type="" priority="" accept="true" x="993" y="357" w="-1" h="-1">
+<action><![CDATA[
+_ = prop(rn, b.toString());
+]]></action>
+</state>
+<state no="38" name="State36" type="" priority="" accept="false" x="744" y="356" w="-1" h="-1">
+<transition to="35" style="">:hex-8</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="39" name="State34" type="" priority="" accept="false" x="744" y="314" w="-1" h="-1">
+<transition to="33" style="">:hex-16</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="40" name="State43" type="" priority="" accept="false" x="829" y="417" w="-1" h="-1">
+<transition to="37" style="968,367">}</transition>
+<transition to="36" style="">.</transition>
+<action><![CDATA[
+b = new StringBuilder();
+]]></action>
+</state>
+<start-anchor no="41" name="alternate" type="" priority="" accept="false" x="37" y="122" w="-1" h="-1">
+<transition to="4" style=""></transition>
+<action><![CDATA[
+alternate
+]]></action>
+</start-anchor>
+<state no="42" name="State33" type="" priority="" accept="false" x="657" y="336" w="-1" h="-1">
+<transition to="39" style="">u</transition>
+<transition to="38" style="">x</transition>
+<transition to="34" style="">[dDwWsSX]</transition>
+<transition to="43" style="">[pP]</transition>
+<transition to="25" style="">.</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="43" name="State40" type="" priority="" accept="false" x="752" y="417" w="-1" h="-1">
+<transition to="40" style="">{</transition>
+<action><![CDATA[
+rn = $c;
+]]></action>
+</state>
+<state no="44" name="State26" type="" priority="" accept="true" x="1053" y="217" w="133" h="25">
+<action><![CDATA[
+_ = cset(b.toString());
+]]></action>
+</state>
+<start-anchor no="45" name="cset" type="" priority="" accept="false" x="656" y="475" w="-1" h="-1">
+<transition to="46" style=""></transition>
+<action><![CDATA[
+cset
+]]></action>
+</start-anchor>
+<start-anchor no="47" name="elem" type="" priority="" accept="false" x="644" y="30" w="65" h="29">
+<transition to="48" style=""></transition>
+<action><![CDATA[
+elem
+]]></action>
+</start-anchor>
+<state no="48" name="newState16" type="" priority="" accept="false" x="646" y="94" w="60" h="24">
+<transition to="25" style="">.</transition>
+<transition to="49" style="">(</transition>
+<transition to="42" style="">&apos;\\&apos;</transition>
+<transition to="50" style="">&apos;.&apos;</transition>
+<transition to="51" style="">[</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="51" name="State22" type="" priority="" accept="false" x="791" y="219" w="142" h="20">
+<transition to="52" style=""></transition>
+<action><![CDATA[
+b = new StringBuilder();
+]]></action>
+</state>
+<state no="49" name="State55" type="" priority="" accept="false" x="755" y="101" w="-1" h="-1">
+<transition to="53" style="">?</transition>
+<transition to="27" style="784,159"></transition>
+<action><![CDATA[
+nowf = 0;
+]]></action>
+</state>
+<state no="50" name="State39" type="" priority="" accept="true" x="689" y="232" w="-1" h="-1">
+<action><![CDATA[
+_ = dot();
+]]></action>
+</state>
+<state no="46" name="State50" type="" priority="" accept="false" x="717" y="476" w="-1" h="-1">
+<transition to="29" style="">.</transition>
+<transition to="30" style="">[</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="54" name="State57" type="" priority="" accept="false" x="915" y="99" w="-1" h="-1">
+<transition to="54" style="1000,91-1002,105">.</transition>
+<transition to="27" style="">:</transition>
+<transition to="55" style="">)</transition>
+<action><![CDATA[
+setflag($c);
+]]></action>
+</state>
+<subautomaton no="52" name="State51" type="" priority="" accept="false" x="971" y="220" w="-1" h="-1">
+<transition to="44" style="">]</transition>
+<action><![CDATA[
+cset
+]]></action>
+</subautomaton>
+<state no="53" name="State56" type="" priority="" accept="false" x="842" y="100" w="-1" h="-1">
+<transition to="54" style="">.</transition>
+<transition to="27" style="">:</transition>
+<transition to="55" style="">)</transition>
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="56" name="State49" type="" priority="" accept="false" x="1184" y="18" w="46" h="23">
+<action><![CDATA[
+// none
+]]></action>
+</state>
+<state no="55" name="State60" type="" priority="" accept="false" x="841" y="46" w="-1" h="-1">
+<transition to="48" style="769,55"></transition>
+<action><![CDATA[
+_writef();
+]]></action>
+</state>
+<definition>
+<package>net.morilib.regex.dfa</package>
+<machine>DFABuilder</machine>
+<target-language>Java</target-language>
+<type>char</type>
+<lexer></lexer>
+<type-to></type-to>
+<value-type>NFAObject&lt;Object, NFAState, Integer&gt;</value-type>
+<put-nina-source>false</put-nina-source><generate-method>inject</generate-method>
+<action><![CDATA[
+package example1;
+]]></action>
+</definition>
+<description>
+<license><![CDATA[
+
+]]></license>
+<description><![CDATA[
+
+]]></description>
+</description>
+<imports>
+</imports>
+<labels>
+<label name="NONDELIM"><![CDATA[
+[^|*+?)]
+]]></label>
+</labels>
+<options>
+</options>
+<operators>
+<lexer></lexer>
+<token>
+  <number>java.lang.Number</number>
+  <variable></variable>
+  <expr>java.lang.Object</expr>
+  <variableAction></variableAction>
+</token>
+<operatorThen></operatorThen>
+<operatorElse></operatorElse>
+<conditionalAction></conditionalAction>
+<function>
+  <use>false</use>
+  <begin>(</begin>
+  <delim>,</delim>
+  <end>)</end>
+  <action></action>
+</function>
+<array>
+  <use>false</use>
+  <begin>[</begin>
+  <delim></delim>
+  <end>]</end>
+  <action></action>
+</array>
+</operators>
+<action><![CDATA[
+
+]]></action>
+</minette>

@@ -26,8 +26,10 @@ import java.util.Set;
 import net.morilib.automata.NFA;
 import net.morilib.automata.NFAState;
 import net.morilib.automata.TextBound;
-import net.morilib.natalia.range.CharSets;
-import net.morilib.natalia.range.Range;
+import net.morilib.automata.misc.LinkedListStack;
+import net.morilib.automata.misc.Stack2;
+import net.morilib.range.CharSets;
+import net.morilib.range.Range;
 
 /**
  * 

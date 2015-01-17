@@ -21,8 +21,8 @@ import java.util.Set;
 
 import net.morilib.automata.NFAState;
 import net.morilib.automata.TextBound;
-import net.morilib.natalia.range.Interval;
-import net.morilib.natalia.range.Range;
+import net.morilib.range.Interval;
+import net.morilib.range.Range;
 
 /**
  * 

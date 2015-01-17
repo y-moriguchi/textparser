@@ -15,54 +15,23 @@
  */
 package net.morilib.automata;
 
-import java.util.Set;
+import java.util.EnumSet;
 
-import net.morilib.range.Range;
-
-/**
- * 
- * 
- * @author MORIGUCHI, Yuichiro 2006/07/13
- */
-public interface NFAEdges<T> {
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(T alphabet);
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(int alphabet);
-
-	/**
-	 * 
-	 * @param alphabet
-	 * @return
-	 */
-	public Set<NFAState> goNext(char alphabet);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<NFAState> goNextEpsilon();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<? extends Range> nextAlphabets();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean isNextEpsilon();
-
+public interface BoundOnewayHead<T> {
+	
+	
+	public T read();
+	
+	
+	public int readInt();
+	
+	
+	public void unread();
+	
+	
+	public EnumSet<TextBound> getBounds();
+	
+	
+	public boolean hasNext();
+	
 }
